@@ -7,7 +7,10 @@ import {
   ScrollRestoration,
 } from "react-router";
 
+
+
 import type { Route } from "./+types/root";
+import Sidebar from "./components/sidebar";
 import "./app.css";
 
 export const links: Route.LinksFunction = () => [
@@ -33,16 +36,38 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <Links />
       </head>
       <body>
+     
         {children}
         <ScrollRestoration />
         <Scripts />
+      
       </body>
     </html>
   );
 }
 
 export default function App() {
-  return <Outlet />;
+ 
+  return <>
+  
+  <div className="grid w-fit overflow-hidden">
+
+      <div className="flex ">
+       <Sidebar/>
+
+        <div className=" h-full  w-full" >
+          {/* <header className="w-full h-20 bg-gray-300 rounded-t-lg">
+            <h1>header</h1>
+          </header> */}
+          <div className="p-4 max-w-10/10">
+            <Outlet />
+          </div>
+        </div>
+      </div>
+
+    </div>
+  
+  </>;
 }
 
 export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {
