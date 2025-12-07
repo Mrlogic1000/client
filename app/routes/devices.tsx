@@ -1,7 +1,9 @@
 import Table from "~/components/table"
 import type { Route } from "./+types/devices"
-import { Outlet, redirect, useNavigate } from "react-router";
+import { Form, Outlet, redirect, useNavigate } from "react-router";
 import MyPaginationComponent from "~/components/pagenation";
+import LinkButton from "~/components/linkbutton";
+import Dialog from "~/components/dialog";
 
 
 export async function loader() {
@@ -66,8 +68,11 @@ export default function Devices({ loaderData }: Route.ComponentProps) {
             datas ? <MyPaginationComponent  datas={datas}  func={func} link="" /> : ''
         }
 
-        <Outlet />
+        
 
+             
+        <Outlet/>
+      
 
 
     </>

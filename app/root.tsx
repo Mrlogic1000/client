@@ -50,20 +50,20 @@ export default function App() {
  
   return <>
   
-  <div className="grid w-fit overflow-hidden">
+  <div className="grid w-full overflow-hidden">
 
-      <div className="flex ">
-       <Sidebar/>
+      {/* <div className="w-full "> */}
+       {/* <Sidebar/> */}
 
-        <div className=" h-full  w-full" >
+        <div className=" h-full  w-full " >
           {/* <header className="w-full h-20 bg-gray-300 rounded-t-lg">
             <h1>header</h1>
           </header> */}
-          <div className="p-4 max-w-10/10">
+          <div className="p-4 w-full">
             <Outlet />
           </div>
         </div>
-      </div>
+      {/* </div> */}
 
     </div>
   

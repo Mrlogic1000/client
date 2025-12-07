@@ -109,7 +109,6 @@ export default function EditDevice({ loaderData }: Route.ComponentProps) {
                     <div className="flex flex-col gap-2 bg-gray-400 m-auto p-5 lg:rounded-xl lg:rounded-l-none">
                         <input type="number" name="id" value={device.id} hidden />
 
-
                         <div className="flex lg:flex-row flex-col  w-full gap-2">
                             <TextField type="text" id="name" name="name" isRequired={true} value={device.name} onChange={handleChange} />
                             <SelectFild
@@ -119,7 +118,6 @@ export default function EditDevice({ loaderData }: Route.ComponentProps) {
                                 value={device.location}
                                 select="location"
                                 onChange={handleSelectChange} />
-
 
                         </div>
                         <div className="flex lg:flex-row flex-col  w-full gap-2">
@@ -133,16 +131,16 @@ export default function EditDevice({ loaderData }: Route.ComponentProps) {
                             <TextField type="text" id="sn" name="sn" isRequired={true} value={device.sn} onChange={handleChange} />
 
                         </div>
+                        <div className="flex lg:flex-row flex-col  w-full gap-2">
+                            <TextField type="text" id="mac" name="mac" isRequired={true} value={device.mac} onChange={handleChange} />
+                            <TextField type="date" id="purchase_date" isRequired={true} name="purchase_date" value={device.purchase_date} onChange={handleDate} />
 
+                        </div>
+                        <div className="flex lg:flex-row flex-col  w-full gap-2">
+                            <SelectFild options={manufac} id="manufacture" name="manufacture" select="Manufacture" value={device.manufacture} onChange={handleSelectChange} />
+                            <SelectFild options={status} id="status" name="status" select="status" value={device.status} onChange={handleSelectChange} />
 
-                        <TextField type="text" id="mac" name="mac" isRequired={true} value={device.mac} onChange={handleChange} />
-                        <SelectFild options={manufac} id="manufacture" name="manufacture" select="Manufacture" value={device.manufacture} onChange={handleSelectChange} />
-
-                        <TextField type="date" id="purchase_date" isRequired={true} name="purchase_date" value={device.purchase_date} onChange={handleDate} />
-                        <SelectFild options={status} id="status" name="status" select="status" value={device.status} onChange={handleSelectChange} />
-
-
-
+                        </div>
                         <input type="number" id="user_id" hidden name="user_id" value={1} />
                         <div className="mt-6 flex items-center lg:justify-end justify-center gap-x-6">
                             <LinkButton link="/devices" title="cancel" />

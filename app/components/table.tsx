@@ -2,30 +2,25 @@ import type React from "react"
 import { MdEdit, MdOutlineDeleteForever } from "react-icons/md";
 import { GrInstallOption } from "react-icons/gr";
 import { IoMdAddCircle } from "react-icons/io";
-import { Link, Navigate, redirect, useNavigate } from "react-router";
-import { TbEyeFilled } from "react-icons/tb";
+import { Form, Link, Navigate, redirect, useNavigate } from "react-router";
+import { TbEyeFilled, TbReport } from "react-icons/tb";
 import Panel from "./panel";
 import { LuUnplug } from "react-icons/lu";
 import { useState, type ChangeEvent } from "react";
-import type { Datas } from "./types";
+import type { Datas, TableProps } from "./types";
+import LinkButton from "./linkbutton";
+import SelectFild from "./select";
 
 
-interface Header {
-    name: string,
-}
-interface Installed {
-    ip: string,
-    create_at: string
 
-}
+// interface Installed {
+//     ip: string,
+//     create_at: string
+
+// }
 
 
-type TableProps = {
-    headers: Header[],
-    datas: Datas[],
-    func: (id: number) => void,
-    link: string
-}
+
 export default function Table({ headers, datas, func }: TableProps) {
     
 const [searchTerm, setSearchTerm] = useState('');
@@ -42,8 +37,7 @@ const handleSearchTerm = (event:any)=>{
 }
 
     return <>
-        <Panel title="devices" searchTerm={searchTerm} url="crude/create" handleSearchTerm={handleSearchTerm}/>
-            <Link to='/devices'><IoMdAddCircle className="text-4xl cursor-pointer" /></Link>
+        <Panel title="devices" searchTerm={searchTerm} url="/crud/create" handleSearchTerm={handleSearchTerm}/>
             {/* <MdOutlineDeleteForever className="bg-red-500 text-3xl p-2 rounded-full cursor-pointer font-bold" /> */}
 
  
@@ -82,6 +76,7 @@ const handleSearchTerm = (event:any)=>{
                                 <Link to={`/crud/edit/${data.id}`}><MdEdit className=" text-2xl  cursor-pointer font-bold" /></Link>
                                 <MdOutlineDeleteForever onClick={() => { func(data.id) }} className="text-2xl cursor-pointer font-bold" />
                                 <Link to={`/device/${data.id}`}><TbEyeFilled className=" text-2xl  cursor-pointer font-bold" /></Link>
+                                <Link to={`report/${data.id}`}><TbReport className=" text-2xl  cursor-pointer font-bold" /></Link>
 
                                 
 
@@ -95,6 +90,8 @@ const handleSearchTerm = (event:any)=>{
 
             </tbody>
         </table>
+
+        
 
 
 

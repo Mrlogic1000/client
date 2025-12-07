@@ -1,7 +1,7 @@
 import { Form, Link, redirect, useLoaderData, useOutletContext, type ActionFunctionArgs } from "react-router";
 import TextField from "~/components/textfield";
 
-import type { ReactElement, JSXElementConstructor, ReactNode, ReactPortal, Key } from "react";
+import { type ReactElement, type JSXElementConstructor, type ReactNode, type ReactPortal, type Key, type ChangeEvent, useState } from "react";
 import SelectFild from "~/components/select";
 import Modal from "~/components/modal";
 import LinkButton from "~/components/linkbutton";
@@ -85,67 +85,85 @@ export async function action({ request }: Route.ActionArgs) {
 
 
 }
- 
+
 
 export default function NewDevice({ actionData }: Route.ComponentProps) {
-    
-    const param:Param[] = useOutletContext()
+
+    const [val, setVal] = useState('')
+    const param: Param[] = useOutletContext()
     console.log(param)
     const status = param[2]
     const manufac = param[1]
     const ips = param[0]
+    const locations = param[3]
     const error = actionData
 
-    
+const handleSelectChange = (event: ChangeEvent<HTMLSelectElement>) => {
+        setVal(event.target.value);
 
+
+    };
 
     return <>
 
-       
-            <div> {error}</div>
-            <Form method="post" >
-                <div className="flex flex-col gap-2 bg-gray-400 m-auto p-5 lg:rounded-xl lg:rounded-l-none">
-                    <div className="flex lg:flex-row flex-col  w-full gap-2">
-                        <TextField type="text" id="location" name="location" isRequired={true} placeholder="location" />
-                        <TextField type="text" id="name" name="name" isRequired={true} placeholder="name" />
+
+        <div> {error}</div>
+        <Form method="post" >
+            <div className="flex flex-col gap-2 bg-gray-400 m-auto p-5 lg:rounded-xl lg:rounded-l-none">
+                <div className="flex lg:flex-row flex-col  w-full gap-2">
+                    <TextField type="text" id="name" name="name" isRequired={true} placeholder="name" />
+                    <SelectFild
+                        options={locations}
+                        id=""
+                        name="location"
+                        value=''
+                        select="location"
+                        onChange={handleSelectChange} />
 
 
 
 
-                    </div>
+                </div>
 
 
-                    <div className="flex lg:flex-row flex-col  w-full gap-2">
-                        <SelectFild options={ips} id="ip" name="ip" select="ip" />
-                        <SelectFild options={types} id="device_type" name="device_type" select="type" />
+                <div className="flex lg:flex-row flex-col  w-full gap-2">
+                    <SelectFild options={ips} id="ip" name="ip" select="ip" />
+                    <SelectFild options={types} id="device_type" name="device_type" select="type" />
 
-                    </div>
+                </div>
+                
+                <div className="flex lg:flex-row flex-col  w-full gap-2">
                     <TextField type="text" id="sn" name="sn" isRequired={true} placeholder="Serial Number" />
-                    <div className="flex lg:flex-row flex-col  w-full gap-2">
-                        <TextField type="text" id="model" name="model" isRequired={true} placeholder="model" />
-                        <TextField type="date" id="purchase_date" isRequired={true} name="purchase_date" placeholder="date" />
-                    </div>
-                    <TextField type="text" id="mac" name="mac" isRequired={true} placeholder="mac address" />
+                <TextField type="text" id="mac" name="mac" isRequired={true} placeholder="mac address" />
+                </div>
+                <div className="flex lg:flex-row flex-col  w-full gap-2">
+                    <TextField type="text" id="model" name="model" isRequired={true} placeholder="model" />
+                    <TextField type="date" id="purchase_date" isRequired={true} name="purchase_date" placeholder="date" />
+                </div>
+                
+                <div className="flex lg:flex-row flex-col  w-full gap-2">
                     <SelectFild options={manufac} id="manufacture" name="manufacture" select="manufacture" />
 
 
                     <SelectFild options={status} id="status" name="status" select="status" />
-
-
-                    <input type="number" id="user_id" hidden name="user_id" value={1} />
-                    <div className="mt-6 flex items-center lg:justify-end justify-center gap-x-6">
-                        <LinkButton link="/devices" title="cancel" />
-                        <button
-                            type="submit"
-                            className="rounded-md bg-indigo-600 px-3 cursor-pointer py-2 text-sm font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-                        >
-                            Save
-                        </button>
-                    </div>
                 </div>
 
-            </Form>
-        
+
+
+                <input type="number" id="user_id" hidden name="user_id" value={1} />
+                <div className="mt-6 flex items-center lg:justify-end justify-center gap-x-6">
+                    <LinkButton link="/devices" title="cancel" />
+                    <button
+                        type="submit"
+                        className="rounded-md bg-indigo-600 px-3 cursor-pointer py-2 text-sm font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                    >
+                        Save
+                    </button>
+                </div>
+            </div>
+
+        </Form>
+
     </>
 }
 

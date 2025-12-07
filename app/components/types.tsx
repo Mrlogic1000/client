@@ -1,4 +1,4 @@
-import type { ChangeEvent } from "react"
+import type { ChangeEvent, ReactNode } from "react"
 
 export interface Options {
     value: string,
@@ -24,7 +24,15 @@ export type SelectFildProps = {
 
 
 }
-
+interface Header {
+    name: string,
+}
+export type TableProps = {
+    headers: Header[],
+    datas: Datas[],
+    func: (id: number) => void,
+    link: string
+}
 export interface Datas {
     id: number,
     sn: string,
@@ -46,4 +54,8 @@ export type PageProps = {
     datas: Datas[]
      func: (id:number)=>void,
     link:string
+}
+
+export type childrenProps = {
+    children: ReactNode
 }
